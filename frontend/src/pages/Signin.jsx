@@ -6,7 +6,7 @@ import { BottomWarning } from "../components/BottomWarning"
 
 export function Signin() {
     return <div className="bg-gray-400 h-screen flex justify-center items-center">
-        <div className="bg-white h-[360px] w-[400px] flex flex-col shadow-md">
+        <div className="bg-white h-[360px] w-[400px] flex flex-col shadow-md rounded-md">
             <Heading label={"Sign In"}/>
             <Subheading label={"Enter your credentials to access your account"}></Subheading>
             <InputBox label={"Email"} placeholder={"Enter your email"} onChange={() => {}}></InputBox>

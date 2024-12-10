@@ -6,7 +6,7 @@ import { BottomWarning } from "../components/BottomWarning"
 
 export function Signup() {
     return <div className="bg-gray-400 h-screen flex justify-center items-center">
-        <div className="bg-white h-[500px] w-[400px] flex flex-col shadow-md">
+        <div className="bg-white h-[500px] w-[400px] flex flex-col shadow-md rounded-md">
             <Heading label={"Sign Up"}/>
             <Subheading label={"Enter your credentials to create an account"}></Subheading>
             <InputBox label={"First Name"} placeholder={"Enter first name"} onChange={() => {}}></InputBox>
