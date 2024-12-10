@@ -3,6 +3,8 @@ export function Appbar() {
         PayTM App
         <div className="flex items-center">
             Hello
+
+            {/* AVATAR */}
             <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-slate-400 ml-1">
                 <div className="text-white text-xl">U</div>
             </div>
