@@ -1,5 +1,15 @@
+import { useNavigate, useSearchParams } from "react-router-dom"
+import axios from "axios";
+import { useState } from "react";
+
 export function SendMoney() {
-    const name = "Shikhar"
+    const [searchParams] = useSearchParams();
+    const id = searchParams.get("id");
+    const name = searchParams.get("name");
+
+    const [amount, setAmount] = useState(0);
+
+    const navigate = useNavigate();
 
     return <div className="bg-slate-300 h-screen flex justify-center items-center">
 
@@ -21,15 +31,27 @@ export function SendMoney() {
                         </div>
 
                         {/* NAME */}
-                        <div className="flex items-center font-semibold text-2xl">{name}</div>
+                        <div className="flex items-center font-semibold text-2xl">{name.replace("_", " ")}</div>
                     </div>
 
                     {/* INPUT */}
                     <label className="font-semibold">Enter amount (in ₹)</label>
-                    <input type="text" placeholder="Enter amount..." className="border-2 rounded-md px-2 py-1 mt-2 mb-6 w-full"/>
+                    <input onInput={(e) => {
+                        setAmount(parseInt(e.target.value))
+                    }} type="text" placeholder="Enter amount..." className="border-2 rounded-md px-2 py-1 mt-2 mb-6 w-full"/>
 
                     {/* BUTTON */}
-                    <button className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white hover:bg-green-800">Click to send</button>
+                    <button onClick={async () => {
+                        await axios.post("http://localhost:3000/v1/account/transfer", {
+                            amount,
+                            to: id
+                        }, {
+                            headers: {
+                                Authorization: "Bearer " + localStorage.token
+                            }
+                        })
+                        navigate("/fin");
+                    }} className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white hover:bg-green-800">Click to send</button>
                 </div>
             </div>
         </div>
