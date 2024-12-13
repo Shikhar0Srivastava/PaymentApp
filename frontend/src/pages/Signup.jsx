@@ -31,7 +31,7 @@ export function Signup() {
             <Subheading label={"Enter your credentials to create an account"}></Subheading>
 
             <div className={`flex justify-center text-sm text-red-500 ${hidden ? "hidden": ""}`}>
-                wrong inputs. try again
+                Wrong inputs. Try again
             </div>
 
             {/* FIRST NAME */}

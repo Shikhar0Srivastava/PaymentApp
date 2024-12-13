@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 export function BottomWarning({label, buttontext, to}) {
-    return <div className="flex justify-center pt-0 pb-4">
+    return <div className="flex justify-center pt-0 pb-6">
         {label}
 
         {/* NAVIGATION */}
