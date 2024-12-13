@@ -42,21 +42,27 @@ router.post("/signup", async (req, res) => {
     const userData = req.body;
     const valid = userDataSchema.safeParse(userData);
     if (valid) {
-        const username = valid.data.username;
-        const exists = await User.findOne({username});
-        if (!exists) {
-            const dbUser = await User.create(userData);
-            const token = jwt.sign({
-                userId: dbUser._id
-            }, secret);
+        try {
+            const username = valid.data.username;
+            const exists = await User.findOne({username});
+            if (!exists) {
+                const dbUser = await User.create(userData);
+                const token = jwt.sign({
+                    userId: dbUser._id
+                }, secret);
 
-            await Account.create({
-                userId: dbUser._id,
-                balance: 1 + Math.random()*10000
-            })
-            return res.status(200).json({
-                message: "User created successfully",
-                token: token
+                await Account.create({
+                    userId: dbUser._id,
+                    balance: 1 + Math.random()*10000
+                })
+                return res.status(200).json({
+                    message: "User created successfully",
+                    token: token
+                })
+            }
+        } catch (error) {
+            return res.status(411).json({
+                message: "Email already taken / Incorrect inputs"
             })
         }
     }
@@ -114,14 +120,20 @@ router.get("/bulk", authMiddleware, async (req, res) => {
     }
 
     const users = await User.find({
-        $or: [
-            {firstName: {
-                '$regex': nameToSearch
-            }},
-            {lastName: {
-                '$regex': nameToSearch
-            }}
-        ]
+        $and: [{
+            $or: [
+                {firstName: {
+                    '$regex': nameToSearch
+                }},
+                {lastName: {
+                    '$regex': nameToSearch
+                }}
+            ]
+        }, {
+            _id: {
+                $ne: req.userId.userId
+            }
+        }]
     });
 
     return res.send({
