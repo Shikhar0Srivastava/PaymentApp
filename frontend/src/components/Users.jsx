@@ -34,7 +34,7 @@ export function Users() {
 
         {/* FRIENDS */}
         <div id="mappingUsers">
-            {users.map(user => <User key={user.firstName} user={user}/>)}
+            {users.map(user => <User key={Math.random() * (user.firstName.length) + "user.firstName"} user={user}/>)}
         </div>
     </div>
 }

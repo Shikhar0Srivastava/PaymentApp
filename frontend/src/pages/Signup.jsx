@@ -6,6 +6,7 @@ import { BottomWarning } from "../components/BottomWarning"
 import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
+import { PasswordComponent } from "../components/PasswordComponent"
 
 export function Signup() {
 
@@ -50,9 +51,9 @@ export function Signup() {
             }}></InputBox>
 
             {/* PASSWORD */}
-            <InputBox ref={passRef} label={"Password"} placeholder={"Create password (Minimum length 8)"} onChange={(e) => {
+            <PasswordComponent ref={passRef} label={"Password"} placeholder={"Create password (Minimum length 8)"} onChange={(e) => {
                 setPassword(e.target.value);
-            }}></InputBox>
+            }}></PasswordComponent>
 
             {/* SIGN UP */}
             <div className="p-6 pb-1">

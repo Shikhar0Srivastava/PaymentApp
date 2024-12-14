@@ -1,6 +1,6 @@
 import { useNavigate, useSearchParams } from "react-router-dom"
 import axios from "axios";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export function SendMoney() {
     const [searchParams] = useSearchParams();
@@ -8,8 +8,11 @@ export function SendMoney() {
     const name = searchParams.get("name");
 
     const [amount, setAmount] = useState(0);
+    const [hidden, setHidden] = useState(true);
 
     const navigate = useNavigate();
+
+    const amtRef = useRef();
 
     return <div className="bg-slate-300 h-screen flex justify-center items-center">
 
@@ -36,21 +39,33 @@ export function SendMoney() {
 
                     {/* INPUT */}
                     <label className="font-semibold">Enter amount (in ₹)</label>
-                    <input onInput={(e) => {
-                        setAmount(parseInt(e.target.value))
+                    <input ref={amtRef} onChange={(e) => {
+
+                        const amt = e.target.value.trim();
+
+                        setAmount(amt)
                     }} type="text" placeholder="Enter amount..." className="border-2 rounded-md px-2 py-1 mt-2 mb-6 w-full"/>
+
+                    <div className={`flex pb-4 justify-center text-sm text-red-500 ${hidden ? "hidden": ""}`}>
+                        Enter valid number
+                    </div>
 
                     {/* BUTTON */}
                     <button onClick={async () => {
-                        await axios.post("http://localhost:3000/v1/account/transfer", {
-                            amount,
-                            to: id
-                        }, {
-                            headers: {
-                                Authorization: "Bearer " + localStorage.token
-                            }
-                        })
-                        navigate("/fin");
+                        if (!amount || isNaN(amount) || amount[0] === '-') {
+                            amtRef.current.value = ""
+                            setHidden(false);
+                        } else {
+                            await axios.post("http://localhost:3000/v1/account/transfer", {
+                                amount,
+                                to: id
+                            }, {
+                                headers: {
+                                    Authorization: "Bearer " + localStorage.token
+                                }
+                            })
+                            navigate("/fin");
+                        }
                     }} className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white hover:bg-green-800">Click to send</button>
                 </div>
             </div>

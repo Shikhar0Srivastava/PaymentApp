@@ -6,6 +6,7 @@ import { BottomWarning } from "../components/BottomWarning"
 import { useRef, useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
+import { PasswordComponent } from "../components/PasswordComponent"
 
 export function Signin() {
 
@@ -38,9 +39,9 @@ export function Signin() {
             }}></InputBox>
             
             {/* PASSWORD */}
-            <InputBox ref={passRef} label={"Password"} placeholder={"Enter your password"} onChange={(e) => {
+            <PasswordComponent ref={passRef} label={"Password"} placeholder={"Enter your password"} onChange={(e) => {
                 setPass(e.target.value);
-            }}></InputBox>
+            }}></PasswordComponent>
             
             {/* BUTTON */}
             <div className="p-6 pb-1">

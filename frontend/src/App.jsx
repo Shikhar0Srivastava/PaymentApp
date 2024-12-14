@@ -14,12 +14,12 @@ function App() {
         <Routes>
           <Route path="/signup" element={<Signup/>}></Route>
           <Route path="/signin" element={<Signin/>}></Route>
-          <Route path="/" element={<PrivateRoutes/>}>
+          {/* <Route path="/" element={<PrivateRoutes/>}> */}
             <Route path="dashboard" element={<Dashboard/>}></Route>
             <Route path="send" element={<SendMoney/>}></Route>
             <Route path="fin" element={<Fin/>}></Route>
             <Route path="profile" element={<Profile/>}></Route>
-          </Route>
+          {/* </Route> */}
         </Routes>
       </BrowserRouter>
     </>

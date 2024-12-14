@@ -114,7 +114,7 @@ router.put("/", authMiddleware, async (req, res) => {
 });
 
 router.get("/bulk", authMiddleware, async (req, res) => {
-    let nameToSearch = req.query.filter;
+    let nameToSearch = req.query.filter
     if (!nameToSearch) {
         nameToSearch = ""
     }
@@ -131,7 +131,7 @@ router.get("/bulk", authMiddleware, async (req, res) => {
             ]
         }, {
             _id: {
-                $ne: req.userId.userId
+                $ne: req.userId
             }
         }]
     });
