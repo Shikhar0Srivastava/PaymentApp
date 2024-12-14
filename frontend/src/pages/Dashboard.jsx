@@ -7,6 +7,7 @@ import axios from "axios"
 export function Dashboard() {
     
     const [balance, setBalance] = useState(0);
+    const [name, setName] = useState("");
 
     useEffect(() => {
         axios.get("http://localhost:3000/v1/account/balance", {
@@ -18,10 +19,21 @@ export function Dashboard() {
         })
     }, [balance])
 
+    useEffect(() => {
+        axios.get("http://localhost:3000/v1/user/me", {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+        }).then(response => {
+            setName(response.data.name)
+        })
+    }, [name])
+    
+
     return <div>
 
         {/* NAVBAR */}
-        <Appbar />
+        <Appbar name={name}/>
         
         <div className="m-8">
 

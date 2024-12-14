@@ -11,7 +11,7 @@ router.get("/balance", authMiddleware, async (req, res) => {
     const user = req.userId;
     try {
         const account = await Account.findOne({
-            userId: user.userId
+            userId: user
         });
         return res.status(200).json({
             balance: account.balance
@@ -29,7 +29,7 @@ router.post("/transfer", authMiddleware, async (req, res) => {
 
         session.startTransaction();
         const {amount, to} = req.body;
-        const userId = req.userId.userId;
+        const userId = req.userId;
         const from = await Account.findOne({userId: userId}).session(session);
         
         if (!from || from.balance < amount) {

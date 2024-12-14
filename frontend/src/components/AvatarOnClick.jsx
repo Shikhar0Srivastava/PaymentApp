@@ -5,7 +5,7 @@ export function AvatarOnClick() {
     const navigate = useNavigate();
 
     return <div className="w-40 h-20 flex-col items-center shadow-lg text-gray-600">
-        <button className="h-10 flex items-center border-b-1 p-1" onClick={() => {
+        <button className="h-10 flex items-center border-b-1 p-1 w-full" onClick={() => {
             navigate("/profile")
         }}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="gray" className="size-6">
@@ -14,7 +14,7 @@ export function AvatarOnClick() {
 
             Account
         </button>
-        <button className="h-10 flex items-center p-1" onClick={() => {
+        <button className="h-10 flex items-center p-1 w-full" onClick={() => {
             localStorage.removeItem("token");
             navigate("/signin");
         }}>

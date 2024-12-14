@@ -146,4 +146,19 @@ router.get("/bulk", authMiddleware, async (req, res) => {
     })
 })
 
+router.get("/me", authMiddleware, async (req, res) => {
+    try {
+        const userId = req.userId;
+        const me = await User.findById(userId);
+        const firstName = me.firstName;
+        return res.send({
+            name: firstName
+        })
+    } catch (error) {
+        return res.status(404).json({
+            message: "db down"
+        })
+    }
+})
+
 module.exports = router;

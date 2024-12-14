@@ -16,6 +16,7 @@ function authMiddleware(req, res, next) {
         req.userId = decoded;
         next();
     } catch (e) {
+        console.error(e)
         return res.sendStatus(403);
     }
 }
