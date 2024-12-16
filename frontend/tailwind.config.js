@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      'serif': ['Palatino', 'serif'],
+      "parkinsans": ["Parkinsans"]
+    }
   },
   plugins: [],
 }

@@ -150,9 +150,13 @@ router.get("/me", authMiddleware, async (req, res) => {
     try {
         const userId = req.userId;
         const me = await User.findById(userId);
-        const firstName = me.firstName;
+        const fName = me.firstName;
+        const lName = me.lastName;
+        const email = me.username;
         return res.send({
-            name: firstName
+            fName,
+            lName,
+            email,
         })
     } catch (error) {
         return res.status(404).json({

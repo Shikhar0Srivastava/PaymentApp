@@ -9,6 +9,7 @@ export function SendMoney() {
 
     const [amount, setAmount] = useState(0);
     const [hidden, setHidden] = useState(true);
+    const [error, setError] = useState(true);
 
     const navigate = useNavigate();
 
@@ -29,7 +30,7 @@ export function SendMoney() {
                     <div className="flex space-x-4 mb-4">
 
                         {/* AVATAR */}
-                        <div className="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-gray-100 rounded-full dark:bg-green-400">
+                        <div className="relative inline-flex items-center justify-center w-12 h-12 overflow-hidden bg-gray-100 rounded-full dark:bg-[#4d4281]">
                             <div className="text-white text-xl">{name[0]}</div>
                         </div>
 
@@ -50,23 +51,34 @@ export function SendMoney() {
                         Enter valid number
                     </div>
 
+                    <div className={`flex pb-4 justify-center text-sm text-red-500 ${error ? "hidden": ""}`}>
+                        Some error occurred. Please try again.
+                    </div>
+
                     {/* BUTTON */}
                     <button onClick={async () => {
                         if (!amount || isNaN(amount) || amount[0] === '-') {
                             amtRef.current.value = ""
+                            setError(true);
                             setHidden(false);
                         } else {
-                            await axios.post("http://localhost:3000/v1/account/transfer", {
-                                amount,
-                                to: id
-                            }, {
-                                headers: {
-                                    Authorization: "Bearer " + localStorage.token
-                                }
-                            })
-                            navigate("/fin");
+                            try {
+                                await axios.post("http://localhost:3000/v1/account/transfer", {
+                                    amount,
+                                    to: id
+                                }, {
+                                    headers: {
+                                        Authorization: "Bearer " + localStorage.token
+                                    }
+                                })
+                                navigate("/fin");
+                            } catch (error) {
+                                console.error(error);
+                                setError(false);
+                                amtRef.current.value = ""
+                            }
                         }
-                    }} className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white hover:bg-green-800">Click to send</button>
+                    }} className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-[#4d4281] text-white hover:bg-[#ae99ff]">Click to send</button>
                 </div>
             </div>
         </div>

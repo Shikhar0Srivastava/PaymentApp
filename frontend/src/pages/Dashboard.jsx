@@ -2,12 +2,12 @@ import { useEffect, useState } from "react"
 import { Appbar } from "../components/Appbar"
 import { Balance } from "../components/Balance"
 import { Users } from "../components/Users"
+import { RecoilRoot } from "recoil"
 import axios from "axios"
 
 export function Dashboard() {
     
     const [balance, setBalance] = useState(0);
-    const [name, setName] = useState("");
 
     useEffect(() => {
         axios.get("http://localhost:3000/v1/account/balance", {
@@ -18,22 +18,14 @@ export function Dashboard() {
             setBalance(response.data.balance);
         })
     }, [balance])
-
-    useEffect(() => {
-        axios.get("http://localhost:3000/v1/user/me", {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem("token")
-            }
-        }).then(response => {
-            setName(response.data.name)
-        })
-    }, [name])
     
 
     return <div>
 
         {/* NAVBAR */}
-        <Appbar name={name}/>
+        <RecoilRoot>
+            <Appbar/>
+        </RecoilRoot>
         
         <div className="m-8">
 

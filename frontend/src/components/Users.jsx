@@ -49,7 +49,7 @@ function User({user}) {
             <div className="flex justify-start items-center">
 
                 {/* AVATAR */}
-                <div className="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-slate-400 ml-1 mr-1">
+                <div className="relative inline-flex items-center justify-center w-8 h-8 overflow-hidden bg-gray-100 rounded-full dark:bg-[#f6e4ff] ml-1 mr-1">
                     <div className="text-lg">{user.firstName[0]}</div>
                 </div>
 
