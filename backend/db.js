@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-mongoose.connect("mongodb+srv://ithinkitsright0152:mo0CtNx2eKLkS86f@paytmcluster.jrvte.mongodb.net/Paytm");
+const secret = require("./config");
+
+mongoose.connect(secret.CONNECTION_STRING);
 
 const userSchema = new Schema({
     username: {

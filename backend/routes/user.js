@@ -49,7 +49,7 @@ router.post("/signup", async (req, res) => {
                 const dbUser = await User.create(userData);
                 const token = jwt.sign({
                     userId: dbUser._id
-                }, secret);
+                }, secret.JWT_SECRET);
 
                 await Account.create({
                     userId: dbUser._id,
@@ -83,7 +83,7 @@ router.post("/signin", async (req, res) => {
 
         if (userExist) {
             const userId = userExist._id.toString();
-            const token = jwt.sign(userId, secret);
+            const token = jwt.sign({userId}, secret.JWT_SECRET);
             return res.status(200).json({
                 token
             });
@@ -166,6 +166,7 @@ router.get("/me", authMiddleware, async (req, res) => {
             email,
         })
     } catch (error) {
+        console.error(error);
         return res.status(404).json({
             message: "db down"
         })

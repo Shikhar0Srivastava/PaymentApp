@@ -12,8 +12,8 @@ function authMiddleware(req, res, next) {
         if (!token) {
             return res.sendStatus(403);
         }
-            const decoded = jwt.verify(token, secret);
-            req.userId = decoded;
+            const decoded = jwt.verify(token, secret.JWT_SECRET);
+            req.userId = decoded.userId;
             next();
     } catch (e) {
         console.error(e)
