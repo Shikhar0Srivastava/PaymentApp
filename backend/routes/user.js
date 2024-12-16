@@ -72,25 +72,32 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/signin", async (req, res) => {
-    const email = req.body.username;
-    const pass = req.body.password;
+    try {
+        const email = req.body.username;
+        const pass = req.body.password;
 
-    const userExist = await User.findOne({
-        username: email,
-        password: pass
-    });
+        const userExist = await User.findOne({
+            username: email,
+            password: pass
+        });
 
-    if (userExist) {
-        const userId = userExist._id.toString();
-        const token = jwt.sign(userId, secret);
-        return res.status(200).json({
-            token
+        if (userExist) {
+            const userId = userExist._id.toString();
+            const token = jwt.sign(userId, secret);
+            return res.status(200).json({
+                token
+            });
+        }
+
+        return res.status(411).json({
+            message: "Error while logging in"
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({
+            message: "Error while logging in"
         });
     }
-
-    return res.status(411).json({
-        message: "Error while logging in"
-    });
 });
 
 router.put("/", authMiddleware, async (req, res) => {
