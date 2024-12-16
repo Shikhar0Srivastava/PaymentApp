@@ -11,7 +11,7 @@ import { meAtom } from "../store/atoms"
 export function Profile() {
 
   return (
-    <div className='h-screen flex items-center justify-center font-parkinsans bg-[#8476ba]'>
+    <div className='min-h-screen flex items-center justify-center font-parkinsans bg-[#8476ba]'>
       <Card>
         <RecoilRoot>
           <CardContents/>

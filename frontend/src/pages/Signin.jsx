@@ -20,7 +20,7 @@ export function Signin() {
 
     const [hidden, setHidden] = useState(true);
 
-    return <div className="bg-[#8476ba] h-screen flex justify-center items-center">
+    return <div className="bg-[#8476ba] min-h-screen flex justify-center items-center">
         <div className="bg-white h-auto w-[400px] flex flex-col shadow-md rounded-md">
 
             {/* HEADING */}

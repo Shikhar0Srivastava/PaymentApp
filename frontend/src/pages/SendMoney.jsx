@@ -15,7 +15,7 @@ export function SendMoney() {
 
     const amtRef = useRef();
 
-    return <div className="bg-slate-300 h-screen flex justify-center items-center">
+    return <div className="bg-slate-300 min-h-screen flex justify-center items-center">
 
         {/* MAIN CARD */}
         <div className="border h-min max-w-md p-4 space-y-8 w-96 bg-white shadow-lg rounded-lg">
