@@ -95,17 +95,17 @@ function CardContents() {
                     Authorization: "Bearer " + localStorage.getItem("token")
                   }
                 })
+                setMe({
+                  fName: first,
+                  lName: last,
+                  email: me.email
+                })
                 setError(true)
                 setHidden(true)
               } catch (error) {
                 console.error(error);
                 setError(false);
               } finally {
-                setMe({
-                  fName: first,
-                  lName: last,
-                  email: me.email
-                })
                 firstRef.current.value = "";
                 lastRef.current.value = "";
                 passRef.current.value = "";
