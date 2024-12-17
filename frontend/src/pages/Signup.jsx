@@ -7,6 +7,8 @@ import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
 import { PasswordComponent } from "../components/PasswordComponent"
+import { useRecoilState } from "recoil"
+import { loadingAtom } from "../store/atoms"
 
 export function Signup() {
 
@@ -21,6 +23,8 @@ export function Signup() {
 
     const emailRef = useRef();
     const passRef = useRef();
+
+    const [loading, setLoading] = useRecoilState(loadingAtom);
 
     return <div className="bg-[#8476ba] min-h-screen flex justify-center items-center">
         <div className="bg-white w-[400px] flex flex-col shadow-md rounded-md h-auto">
@@ -57,7 +61,8 @@ export function Signup() {
 
             {/* SIGN UP */}
             <div className="p-6 pb-1">
-                <Button label={"Sign Up"} onClick={async ()=>{
+                <Button loading={loading} label={"Sign Up"} onClick={async ()=>{
+                    setLoading(true);
                     try {
                         const response = await axios.post("https://paymentapp-backend-vrtx.onrender.com/v1/user/signup", {
                             username,
@@ -73,6 +78,8 @@ export function Signup() {
                         emailRef.current.value = ""
                         passRef.current.value = ""
                         setHidden(false);
+                    } finally {
+                        setLoading(false);
                     }
                 }}></Button>
             </div>

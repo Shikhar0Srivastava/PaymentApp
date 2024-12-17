@@ -15,3 +15,8 @@ export const meAtom = atom({
         }
     })
 })
+
+export const loadingAtom = atom({
+    key: "loadingAtom",
+    default: false
+})

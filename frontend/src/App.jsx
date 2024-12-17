@@ -7,10 +7,11 @@ import { Fin } from "./pages/Fin";
 import { Profile } from "./pages/Profile";
 import { PrivateRoutes } from "./pages/PrivateRoutes";
 import { Homepage } from "./pages/Homepage";
+import { RecoilRoot } from "recoil";
 function App() {
 
   return (
-    <>
+    <RecoilRoot>
       <BrowserRouter>
         <Routes>
           <Route index element={<Homepage/>}></Route>
@@ -24,7 +25,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </RecoilRoot>
   )
 }
 

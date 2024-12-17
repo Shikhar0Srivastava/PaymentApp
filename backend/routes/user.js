@@ -125,15 +125,18 @@ router.get("/bulk", authMiddleware, async (req, res) => {
     if (!nameToSearch) {
         nameToSearch = ""
     }
+    nameToSearch = nameToSearch.toLowerCase();
 
     const users = await User.find({
         $and: [{
             $or: [
                 {firstName: {
-                    '$regex': nameToSearch
+                    '$regex': nameToSearch,
+                    '$options': "i"
                 }},
                 {lastName: {
-                    '$regex': nameToSearch
+                    '$regex': nameToSearch,
+                    '$options': "i"
                 }}
             ]
         }, {

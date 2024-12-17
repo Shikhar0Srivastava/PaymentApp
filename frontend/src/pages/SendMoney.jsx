@@ -1,6 +1,9 @@
 import { useNavigate, useSearchParams } from "react-router-dom"
 import axios from "axios";
 import { useState, useRef } from "react";
+import { loadingAtom } from "../store/atoms";
+import { useRecoilState } from "recoil";
+import { Loader } from "../components/Loader";
 
 export function SendMoney() {
     const [searchParams] = useSearchParams();
@@ -14,6 +17,8 @@ export function SendMoney() {
     const navigate = useNavigate();
 
     const amtRef = useRef();
+
+    const [loading, setLoading] = useRecoilState(loadingAtom);
 
     return <div className="bg-slate-300 min-h-screen flex justify-center items-center">
 
@@ -62,6 +67,7 @@ export function SendMoney() {
                             setError(true);
                             setHidden(false);
                         } else {
+                            setLoading(true);
                             try {
                                 await axios.post("https://paymentapp-backend-vrtx.onrender.com/v1/account/transfer", {
                                     amount,
@@ -76,9 +82,11 @@ export function SendMoney() {
                                 console.error(error);
                                 setError(false);
                                 amtRef.current.value = ""
+                            } finally {
+                                setLoading(false);
                             }
                         }
-                    }} className="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-[#4d4281] text-white hover:bg-[#ae99ff]">Click to send</button>
+                    }} className={`justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full text-white hover:bg-[#ae99ff]`} style={{backgroundColor: loading ? "white" : "#8746ba"}}>{loading ? <Loader/> : "Click to send"}</button>
                 </div>
             </div>
         </div>
