@@ -6,7 +6,7 @@ export const meAtom = atom({
     default: selector({
         key: "meDefaultSelector",
         get: async () => {
-            const response = await axios.get("https://paymentapp-backend-vrtx.onrender.com/v1/user/me", {
+            const response = await axios.get("http://localhost:3000/v1/user/me", {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token")
                 }

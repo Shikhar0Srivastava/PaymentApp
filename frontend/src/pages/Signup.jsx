@@ -64,7 +64,7 @@ export function Signup() {
                 <Button loading={loading} label={"Sign Up"} onClick={async ()=>{
                     setLoading(true);
                     try {
-                        const response = await axios.post("https://paymentapp-backend-vrtx.onrender.com/v1/user/signup", {
+                        const response = await axios.post("http://localhost:3000/v1/user/signup", {
                             username,
                             firstName,
                             lastName,

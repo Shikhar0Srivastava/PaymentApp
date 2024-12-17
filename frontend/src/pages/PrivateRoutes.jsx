@@ -10,7 +10,7 @@ export const PrivateRoutes = () => {
                 return false;
             }
 
-            const response = await axios.get("https://paymentapp-backend-vrtx.onrender.com/v1/validate", {
+            const response = await axios.get("http://localhost:3000/v1/validate", {
                 headers: {
                     Authorization: "Bearer " + token
                 }

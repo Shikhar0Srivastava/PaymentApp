@@ -10,7 +10,7 @@ export function Dashboard() {
     const [balance, setBalance] = useState(0);
 
     useEffect(() => {
-        axios.get("https://paymentapp-backend-vrtx.onrender.com/v1/account/balance", {
+        axios.get("http://localhost:3000/v1/account/balance", {
             headers: {
                 Authorization: "Bearer " + localStorage.token
             }

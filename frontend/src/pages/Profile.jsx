@@ -5,7 +5,7 @@ import { InputBox } from "../components/InputBox"
 import { PasswordComponent } from "../components/PasswordComponent"
 import { useState, useRef } from "react"
 import axios from "axios"
-import { useRecoilValue, RecoilRoot } from "recoil"
+import { useRecoilState, RecoilRoot } from "recoil"
 import { meAtom } from "../store/atoms"
 
 export function Profile() {
@@ -29,7 +29,7 @@ function Card({children}) {
 
 function CardContents() {
 
-  const me = useRecoilValue(meAtom);
+  const [me, setMe] = useRecoilState(meAtom);
 
   const [error, setError] = useState(true);
   const [hidden, setHidden] = useState(true);
@@ -85,8 +85,8 @@ function CardContents() {
             }}></PasswordComponent>
 
             <button onClick={async () => {
-              try {
-                await axios.put("https://paymentapp-backend-vrtx.onrender.com/", {
+              try {    
+                await axios.put("http://localhost:3000/v1/user", {
                   firstName: first,
                   lastName: last,
                   password: pass
@@ -96,9 +96,16 @@ function CardContents() {
                   }
                 })
                 setError(true)
+                setHidden(true)
               } catch (error) {
                 console.error(error);
                 setError(false);
+              } finally {
+                setMe({
+                  fName: first,
+                  lName: last,
+                  email: me.email
+                })
                 firstRef.current.value = "";
                 lastRef.current.value = "";
                 passRef.current.value = "";

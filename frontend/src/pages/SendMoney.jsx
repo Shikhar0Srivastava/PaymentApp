@@ -69,7 +69,7 @@ export function SendMoney() {
                         } else {
                             setLoading(true);
                             try {
-                                await axios.post("https://paymentapp-backend-vrtx.onrender.com/v1/account/transfer", {
+                                await axios.post("http://localhost:3000/v1/account/transfer", {
                                     amount,
                                     to: id
                                 }, {

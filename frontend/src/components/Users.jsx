@@ -9,7 +9,7 @@ export function Users() {
     const [filter, setFilter] = useState("");
 
     useEffect(() => {
-        axios.get("https://paymentapp-backend-vrtx.onrender.com/v1/user/bulk?filter=" + filter, {
+        axios.get("http://localhost:3000/v1/user/bulk?filter=" + filter, {
             headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")
             }
