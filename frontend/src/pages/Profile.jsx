@@ -86,7 +86,7 @@ function CardContents() {
 
             <button onClick={async () => {
               try {
-                await axios.put("https://paymentapp-backend-vrtx.onrender.com/", {
+                await axios.put("https://paymentapp-backend-vrtx.onrender.com/v1/user/", {
                   firstName: first,
                   lastName: last,
                   password: pass
